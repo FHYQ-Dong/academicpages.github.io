@@ -8,7 +8,14 @@ author_profile: true
 {% include base_path %}
 
 
-{% for post in site.portfolio %}
-  {% include archive-single.html %}
+{% assign portfolio_groups = "Undergraduate Research|Coursework|Notes" | split: "|" %}
+
+{% for group in portfolio_groups %}
+  <h2 >{{ group }}</h2>
+  {% for post in site.portfolio %}
+    {% if post.title contains group %}
+      {% include archive-single.html %}
+    {% endif %}
+  {% endfor %}
 {% endfor %}
 
